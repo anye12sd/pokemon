@@ -11,9 +11,9 @@ function isInvalidNumber(e,min,max) {
   s = e.val();
 
   if (!s) {
-    return "This number is required.";
+    return "这个数字是必填项";
   } else if (!isNumber(s)) {
-    return "This number is not valid.";
+    return "这个数值不正常，请核对";
   }
 
   var i = parseInt(s);
@@ -211,20 +211,20 @@ function guessV(event) {
 
 function ajaxError(x, t, m) {
   if (t == "timeout") {
-    showMessage("error", "This board is too complex for me to solve. Sorry. :(");
+    showMessage("error", "这板块太难了老铁，我也救不了你");
   } else {
-    showMessage("error", "An error occurred.");
+    showMessage("error", "发生了一个错误.");
   }
 }
 
 function ajaxSuccess(data) {
   if (!data) {
-    showMessage("error", "An error occurred.");
+    showMessage("error", "出错了，重点.");
     return;
   }
 
   if (!data["IsPossible"]) {
-    showMessage("error", "This board is not possible. Please check your input.");
+    showMessage("error", "板块数据不正确，怎么连抄都能抄歪来.");
     return;
   }
 
@@ -232,7 +232,7 @@ function ajaxSuccess(data) {
   updateBoardDisplay();
 
   if (data["IsWon"]) {
-    showMessage("win", "Game clear! You've found all the hidden <img src=\"https://s3.amazonaws.com/vflip/images/3.png\"> and <img src=\"https://s3.amazonaws.com/vflip/images/2.png\"> cards.");
+    showMessage("win", "功德+1! 你已经找到了所有的<img src='./images/voltorb.png' />");
     return;
   }
 
@@ -276,7 +276,7 @@ function ajaxSuccess(data) {
   $(("#card"+guessX)+guessY).append(tbl);
 
   if (safety >= 1)
-    showMessage("win", "What is this Card?");
+    showMessage("win", "这张卡是啥子?");
   else {
     safety = (1-safety)*100;
     if (safety < 1) {
@@ -284,12 +284,12 @@ function ajaxSuccess(data) {
     } else {
       safetyString = parseFloat(safety).toFixed(0);
     }
-    showMessage("warn", "What is this Card? There is a " + safetyString + "% chance it is a <img src=\"https://s3.amazonaws.com/vflip/images/volt.png\" />.");
+    showMessage("warn", "这张卡是啥子? 有" + safetyString + "% 概率是 <img src='./images/voltorb.png' />.");
   }
 }
 
 function reset() {
-  showMessage("win", "welcome! 请输入分数和霹雳电球总数");
+  showMessage("win", "xhk搬运汉化! 请输入分数和霹雳电球总数");
   resetBoard();
 
   for (var i = 0; i < boardSize; i++) {
@@ -393,7 +393,7 @@ function pointVal(x) {
 
 function ajaxGetRandomBoardSuccess(data) {
   if (!data) {
-    showMessage("lose", "发生了一个错误");
+    showMessage("lose", "发生了一个错误，请重试");
     return;
   }
   // Display the row/column point/voltorb totals
